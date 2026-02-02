@@ -27,7 +27,6 @@ const Otp = (props) => {
   const ButtonHandler = (elem) => {
     elem.preventDefault();
     if (UserIdValidation()) {
-      alert("Login Successful");
       navigate("/otp-verify");
     } else {
       console.log("Login Failed ,Validation checks not meet");
