@@ -3,7 +3,6 @@ import Password from "../components/Password";
 import Otp from "../components/Otp";
 
 const Loginpage = () => {
-  
   const [UserPassword, setUserPassword] = useState("");
   const [UserId, setUserId] = useState("");
   const [ActiveTab, setActiveTab] = useState("Password");

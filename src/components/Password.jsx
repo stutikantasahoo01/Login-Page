@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
-
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 const Password = (props) => {
   // console.log(props);
+
+  const [ShowPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const passwordPattern = /^(?=.*[0-9]).{8,}$/;
   const UserIdPattern = /^[a-zA-Z0-9]+$/;
@@ -9,6 +12,9 @@ const Password = (props) => {
   const setUserId = props.setUserId;
   const UserPassword = props.UserPassword;
   const setUserPassword = props.setUserPassword;
+  const showPassword = () => {
+    setShowPassword(!ShowPassword);
+  };
   const UserIdValidation = () => {
     if (!UserId) {
       alert("Validation Failed,UserId should not be empty");
@@ -66,16 +72,31 @@ const Password = (props) => {
           placeholder="User Id"
           id="User-Id"
         />
-        <input
-          className="p-3 bg-amber-50 text-black font-medium"
-          type="password"
-          value={UserPassword}
-          onChange={(el) => {
-            setUserPassword(el.target.value);
-          }}
-          placeholder="Password"
-          id="Password"
-        />
+        <div className="w-full relative">
+          <input
+            className="p-3 bg-amber-50 text-black font-medium w-full"
+            type={ShowPassword ? "text" : "password"}
+            value={UserPassword}
+            onChange={(el) => {
+              setUserPassword(el.target.value);
+            }}
+            placeholder="Password"
+            id="Password"
+          />
+          <button
+            onClick={() => {
+              showPassword();
+            }}
+            className="absolute right-3 top-3"
+          >
+            {ShowPassword ? (
+              <Eye strokeWidth={1.35} />
+            ) : (
+              <EyeOff strokeWidth={0.75} />
+            )}
+          </button>
+        </div>
+
         <a className="text-blue-600 font-normal tracking-wide" href="#">
           Forgot User Id / Password ?
         </a>
