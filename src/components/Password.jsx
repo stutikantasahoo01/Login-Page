@@ -17,7 +17,7 @@ const Password = (props) => {
   };
   const UserIdValidation = () => {
     if (!UserId) {
-      alert("Validation Failed,UserId should not be empty");
+      alert("User Id should not be empty");
       return false;
     }
     if (!UserIdPattern.test(UserId)) {
@@ -36,7 +36,7 @@ const Password = (props) => {
   };
   const UserPasswordValidation = () => {
     if (!UserPassword) {
-      alert("Validation Failed,Password should not be empty");
+      alert("Password should not be empty");
       return false;
     }
     if (UserPassword.length < 8) {
