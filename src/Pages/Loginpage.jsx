@@ -3,35 +3,37 @@ import Password from "../components/Password";
 import Otp from "../components/Otp";
 
 const Loginpage = () => {
+  const ActiveButtonStyle = "text-blue-600 border-blue-600";
+  const inactiveButtonStyle = "text-black";
   const [UserPassword, setUserPassword] = useState("");
   const [UserId, setUserId] = useState("");
   const [ActiveTab, setActiveTab] = useState("Password");
   const ShowPassword = () => setActiveTab("Password");
   const ShowOtp = () => setActiveTab("Otp");
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full">
+    <div className="flex flex-col items-center justify-center h-full w-full ">
       <h1 className="text-2xl mt-3 mb-3 font-normal">Login to continue</h1>
-      <h2 className="text-black text-xl font-light  mb-3">
+      <h2 className="text-black text-lg mb-3 text-center font-normal">
         Don't have An account with us ?
-        <a className="text-blue-700 font-normal" href="#">
+        <a className="text-blue-700 text-lg font-normal" href="#">
           Click Here To Register
         </a>
       </h2>
-      <div className="flex items-center gap-8">
+      <div className="flex items-center justify-center gap-2 w-[65%]  mb-2 mt-5">
         <button
-          className="bg-amber-50 text-black py-2 px-2 font-normal mb-5 mt-3 "
+          className={` text-black text-lg py-2 px-2  w-1/2 ${ActiveTab === "Password" ? ActiveButtonStyle : inactiveButtonStyle}`}
           onClick={ShowPassword}
         >
           Login with password
         </button>
         <button
-          className="bg-amber-50 text-black py-2 px-3 font-normal mb-5 mt-3 "
+          className={`text-black text-lg py-2 px-2  w-1/2 ${ActiveTab === "Password" ? inactiveButtonStyle : ActiveButtonStyle}`}
           onClick={ShowOtp}
         >
           Login with OTP
         </button>
       </div>
-      <div className="w-[60%]">
+      <div className="w-[70%]">
         {ActiveTab === "Password" ? (
           <Password
             UserId={UserId}

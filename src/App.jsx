@@ -6,7 +6,10 @@ import Dashborad from "./Pages/Dashboard";
 
 const App = () => {
   return (
-    <div className="Form-Box bg-amber-100 p-4 w-[40%] h-[80%]">
+    <div
+      // style={{ height: "600px", width: "600px", backgroundColor: "green" }}
+      className="Form-Box  p-4 w-3xl max-w-3xl h-[80%]"
+    >
       <Routes>
         <Route path="/" element={<Loginpage />} />
         <Route path="/otp-verify" element={<OtpVerification />} />
@@ -17,3 +20,4 @@ const App = () => {
 };
 
 export default App;
+//
