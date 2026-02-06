@@ -63,7 +63,7 @@ const Password = (props) => {
     <div className="flex flex-col p-3 ">
       <div className="flex flex-col justify-between gap-3">
         <input
-          className="p-3 bg-amber-50 text-black font-medium"
+          className="p-3 bg-[#f1f3f5] text-black font-normal"
           type="text"
           value={UserId}
           onChange={(elem) => {
@@ -74,7 +74,7 @@ const Password = (props) => {
         />
         <div className="w-full relative">
           <input
-            className="p-3 bg-amber-50 text-black font-medium w-full"
+            className="p-3 bg-[#f1f3f5] text-black font-normal w-full"
             type={ShowPassword ? "text" : "password"}
             value={UserPassword}
             onChange={(el) => {
@@ -87,12 +87,12 @@ const Password = (props) => {
             onClick={() => {
               showPassword();
             }}
-            className="absolute right-3 top-3"
+            className="absolute right-3 top-3 "
           >
             {ShowPassword ? (
               <Eye strokeWidth={1.35} />
             ) : (
-              <EyeOff strokeWidth={0.75} />
+              <EyeOff strokeWidth={1.35} />
             )}
           </button>
         </div>
@@ -105,7 +105,7 @@ const Password = (props) => {
         onClick={(elem) => {
           ButtonHandler(elem);
         }}
-        className="bg-amber-50 text-black py-2 font-medium mb-5 mt-3"
+        className="bg-[#007bff] text-white py-2 font-medium mb-5 mt-3 rounded transition-all duration-500 hover:bg-white hover:text-[#007bff] hover:border-blue-600 hover:border"
       >
         Login
       </button>

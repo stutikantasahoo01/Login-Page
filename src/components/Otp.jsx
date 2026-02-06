@@ -37,7 +37,7 @@ const Otp = (props) => {
     <div className="flex flex-col w-full p-3">
       <div className="flex flex-col justify-between gap-3">
         <input
-          className="p-3 bg-amber-50 text-black font-medium"
+          className="p-3 bg-[#f1f3f5] text-black font-normal"
           type="text"
           value={UserId}
           onChange={(elem) => {
@@ -46,14 +46,14 @@ const Otp = (props) => {
           placeholder="User Id"
         />
         <a className="text-blue-600 font-normal tracking-wide" href="#">
-          Forget User Id/Password ?
+          Forgot User Id/Password ?
         </a>
       </div>
       <button
         onClick={(elem) => {
           ButtonHandler(elem);
         }}
-        className="bg-amber-50 text-black py-2 font-medium mb-5 mt-3"
+        className="bg-[#007bff] text-white py-2 font-medium mb-5 mt-3 rounded transition-all duration-500 hover:bg-white hover:text-[#007bff] hover:border-blue-600 hover:border"
       >
         Login With OTP
       </button>
