@@ -12,15 +12,15 @@ const Loginpage = () => {
   const ShowPassword = () => setActiveTab("Password");
   const ShowOtp = () => setActiveTab("Otp");
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full p-5">
-      <h1 className="text-2xl mt-3 mb-3 font-sembold">Login to continue</h1>
+    <div className="flex flex-col items-center justify-centermin-h-[70vh] w-[50%] p-5">
+      <h1 className="text-2xl mt-3 mb-2 font-sembold">Login to continue</h1>
       <h2 className="text-black text-lg mb-3 text-center font-normal">
         Don't have An account with us ?
         <a className="text-blue-700 text-lg font-normal" href="#">
           Click Here To Register
         </a>
       </h2>
-      <div className="flex items-center justify-center gap-2 w-[65%]  mb-2 mt-5">
+      <div className="flex items-center justify-center gap-2 w-[65%]  mb-2 mt-3">
         <button
           className={` text-black text-lg py-2 px-2  w-1/2 ${ActiveTab === "Password" ? ActiveButtonStyle : inactiveButtonStyle}`}
           onClick={ShowPassword}

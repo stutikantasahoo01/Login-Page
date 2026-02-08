@@ -34,9 +34,10 @@ const Password = (props) => {
       return false;
     }
     if (!UserIdPattern.test(value)) {
+      setInputValidation(false);
       return false;
     }
-    if (UsvalueerId.includes(" ")) {
+    if (value.includes(" ")) {
       setInputValidation(false);
       return false;
     }
@@ -118,7 +119,7 @@ const Password = (props) => {
           onChange={(elem) => {
             const newValue = elem.target.value;
             setUserId(newValue);
-            inputFildValidation();
+            inputFildValidation(newValue);
           }}
           placeholder="User Id"
           id="User-Id"
