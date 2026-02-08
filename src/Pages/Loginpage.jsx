@@ -3,6 +3,7 @@ import Password from "../components/Password";
 import Otp from "../components/Otp";
 
 const Loginpage = () => {
+  const [Error, setError] = useState([]);
   const ActiveButtonStyle = "text-blue-600 border-blue-600 border-b-4";
   const inactiveButtonStyle = "text-black";
   const [UserPassword, setUserPassword] = useState("");
@@ -40,13 +41,20 @@ const Loginpage = () => {
             setUserId={setUserId}
             UserPassword={UserPassword}
             setUserPassword={setUserPassword}
+            setError={setError}
+            Error={Error}
           />
         ) : (
-          <Otp UserId={UserId} setUserId={setUserId} />
+          <Otp
+            UserId={UserId}
+            setUserId={setUserId}
+            setError={setError}
+            Error={Error}
+          />
         )}
       </div>
 
-      <div className="flex flex-col items-center justify-center w-[60%]">
+      <div className="flex flex-col items-center justify-center w-[60%] p-3">
         <h3 className="text-xl font-semibold mb-4">Sign In Use</h3>
         <div className="flex items-center justify-between w-[30%] mt-1 mb-2 gap-1">
           <a

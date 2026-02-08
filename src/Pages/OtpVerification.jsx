@@ -33,13 +33,13 @@ const OtpVerification = () => {
   return (
     <div className="w-full h-full">
       <div className=" h-[80%] otp-container flex flex-col justify-center gap-2">
-        <h2 className="text-black text-2xl font-medium ">Enter OTP</h2>
-        <h3 className="text-black text-xs font-medium ">
+        <h2 className="text-blue-700 text-2xl font-medium ">Enter OTP</h2>
+        <h3 className="text-black text-xs font-medium">
           Enter the OTP we sent to your Mobile Number
         </h3>
         <h4 className="text-black text-xs font-normal ">+91 7608883110</h4>
         <input
-          className="p-3 bg-white text-black font-normal"
+          className="p-3 bg-[#f1f3f5] text-black font-normal"
           placeholder="Enter OTP Here"
           type="text"
           value={ValidateOtp}
@@ -52,11 +52,11 @@ const OtpVerification = () => {
             onClick={(elem) => {
               ButtonHandler(elem);
             }}
-            className="bg-amber-50 text-black px-3 py-2 font-medium mb-5 mt-3"
+            className="bg-[#007bff] text-white py-2 px-3 font-medium mb-5 mt-3 rounded transition-all duration-500 hover:bg-white hover:text-[#007bff] hover:border-blue-600 hover:border"
           >
             Submit
           </button>
-          <button className="bg-amber-50 text-black  font-medium mb-5 mt-3 px-3 py-2">
+          <button className="bg-[#007bff] text-white py-2 px-3 font-medium mb-5 mt-3 rounded transition-all duration-500 hover:bg-white hover:text-[#007bff] hover:border-blue-600 hover:border">
             Resend OTP
           </button>
         </div>

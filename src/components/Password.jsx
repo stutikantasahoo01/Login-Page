@@ -2,8 +2,21 @@ import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 const Password = (props) => {
-  // console.log(props);
-
+  const validation_message = {
+    empty_id: "User ID is required",
+    empty_password: "Password is required",
+    invalid_userid: "Please enter a valid User ID",
+    invalid_pass: "Please enter valid password",
+    success_login: "Login Succesfull",
+    failed_login: "Login Failed",
+  };
+  const removeError = (message) => {
+    props.setError((prevError) =>
+      prevError.filter((error) => error !== message),
+    );
+  };
+  const [PasswordFieldValidation, setPasswordFieldValidation] = useState(true);
+  const [InputValidation, setInputValidation] = useState(true);
   const [ShowPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const passwordPattern = /^(?=.*[0-9]).{8,}$/;
@@ -14,6 +27,42 @@ const Password = (props) => {
   const setUserPassword = props.setUserPassword;
   const showPassword = () => {
     setShowPassword(!ShowPassword);
+  };
+  const inputFildValidation = (value) => {
+    if (!value) {
+      setInputValidation(false);
+      return false;
+    }
+    if (!UserIdPattern.test(value)) {
+      return false;
+    }
+    if (UsvalueerId.includes(" ")) {
+      setInputValidation(false);
+      return false;
+    }
+
+    if (value.length < 8) {
+      setInputValidation(false);
+      return false;
+    }
+    setInputValidation(true);
+    return true;
+  };
+  const passwordFildValidation = (value) => {
+    if (!value) {
+      setPasswordFieldValidation(false);
+      return false;
+    }
+    if (value.length < 8) {
+      setPasswordFieldValidation(false);
+      return false;
+    }
+    if (!passwordPattern.test(value)) {
+      setPasswordFieldValidation(false);
+      return false;
+    }
+    setPasswordFieldValidation(true);
+    return true;
   };
   const UserIdValidation = () => {
     if (!UserId) {
@@ -63,22 +112,28 @@ const Password = (props) => {
     <div className="flex flex-col p-3 ">
       <div className="flex flex-col justify-between gap-3">
         <input
-          className="p-3 bg-[#f1f3f5] text-black font-normal"
+          className={`p-3 bg-[#f1f3f5] text-black font-normal rounded ${InputValidation === false ? "border-red-500 border-2" : "border-[#f1f3f5]"}`}
           type="text"
           value={UserId}
           onChange={(elem) => {
-            setUserId(elem.target.value);
+            const newValue = elem.target.value;
+            setUserId(newValue);
+            inputFildValidation();
           }}
           placeholder="User Id"
           id="User-Id"
         />
-        <div className="w-full relative">
+        <div
+          className={`w-full relative rounded ${PasswordFieldValidation === false ? "border-red-500 border-2" : "border-[#f1f3f5]"}`}
+        >
           <input
             className="p-3 bg-[#f1f3f5] text-black font-normal w-full"
             type={ShowPassword ? "text" : "password"}
             value={UserPassword}
             onChange={(el) => {
-              setUserPassword(el.target.value);
+              const newValue = el.target.value;
+              setUserPassword(newValue);
+              passwordFildValidation(newValue);
             }}
             placeholder="Password"
             id="Password"

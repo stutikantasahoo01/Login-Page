@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Otp = (props) => {
@@ -5,6 +6,29 @@ const Otp = (props) => {
   console.log(props);
   const UserIdPattern = /^[a-zA-Z0-9]+$/;
   const { UserId, setUserId } = props;
+  const [UserFieldValidation, setUserFieldValidation] = useState(true);
+  const UserIdValidationCheck = (value) => {
+    if (!value) {
+      setUserFieldValidation(false);
+      return false;
+    }
+    if (!UserIdPattern.test(value)) {
+      setUserFieldValidation(false);
+
+      return false;
+    }
+    if (value.includes(" ")) {
+      setUserFieldValidation(false);
+      return false;
+    }
+
+    if (value.length < 8) {
+      setUserFieldValidation(false);
+      return false;
+    }
+    setUserFieldValidation(true);
+    return true;
+  };
   const UserIdValidation = () => {
     if (!UserId) {
       alert("Validation Failed,UserId should not be empty");
@@ -37,11 +61,13 @@ const Otp = (props) => {
     <div className="flex flex-col w-full p-3">
       <div className="flex flex-col justify-between gap-3">
         <input
-          className="p-3 bg-[#f1f3f5] text-black font-normal"
+          className={`p-3 bg-[#f1f3f5] text-black font-normal rounded ${UserFieldValidation === false ? "border-red-500 border-2" : "border-[#f1f3f5]"}`}
           type="text"
           value={UserId}
           onChange={(elem) => {
-            setUserId(elem.target.value);
+            const newValue = elem.target.value;
+            setUserId(newValue);
+            UserIdValidationCheck(newValue);
           }}
           placeholder="User Id"
         />
