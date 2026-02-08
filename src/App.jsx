@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div
       // style={{ height: "600px", width: "600px", backgroundColor: "green" }}
-      className="Form-Box p-4 w-3xl max-w-3xl h-[80%]"
+      className="Form-Box w-3xl max-w-3xl h-[80%] sm:h-screen sm:w-full"
     >
       <Routes>
         <Route path="/" element={<Loginpage />} />

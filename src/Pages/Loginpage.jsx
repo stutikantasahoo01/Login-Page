@@ -12,7 +12,7 @@ const Loginpage = () => {
   const ShowPassword = () => setActiveTab("Password");
   const ShowOtp = () => setActiveTab("Otp");
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full ">
+    <div className="flex flex-col items-center justify-center h-full w-full p-5">
       <h1 className="text-2xl mt-3 mb-3 font-sembold">Login to continue</h1>
       <h2 className="text-black text-lg mb-3 text-center font-normal">
         Don't have An account with us ?
