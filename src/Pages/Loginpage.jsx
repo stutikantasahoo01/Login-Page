@@ -12,15 +12,17 @@ const Loginpage = () => {
   const ShowPassword = () => setActiveTab("Password");
   const ShowOtp = () => setActiveTab("Otp");
   return (
-    <div className="flex flex-col items-center justify-centermin-h-[70vh] w-[50%] p-5">
-      <h1 className="text-2xl mt-3 mb-2 font-sembold">Login to continue</h1>
+    <div className="flex flex-col items-center justify-center min-h-[70vh] w-full sm:w-full md:max-w-xl lg:max-w-2xl p-6 sm:p-10 ">
+      <h1 className="text-2xl mt-3 mb-2 font-sembold text-center">
+        Login to continue
+      </h1>
       <h2 className="text-black text-lg mb-3 text-center font-normal">
         Don't have An account with us ?
         <a className="text-blue-700 text-lg font-normal" href="#">
           Click Here To Register
         </a>
       </h2>
-      <div className="flex items-center justify-center gap-2 w-[65%]  mb-2 mt-3">
+      <div className="flex items-center justify-center  w-[90%] sm:w-[65%] md:w-[65%] mb-2 mt-3 ">
         <button
           className={` text-black text-lg py-2 px-2  w-1/2 ${ActiveTab === "Password" ? ActiveButtonStyle : inactiveButtonStyle}`}
           onClick={ShowPassword}
@@ -34,7 +36,7 @@ const Loginpage = () => {
           Login with OTP
         </button>
       </div>
-      <div className="w-[70%]">
+      <div className="w-[90%] sm:w-[65%] md:w-[65%]">
         {ActiveTab === "Password" ? (
           <Password
             UserId={UserId}
@@ -54,9 +56,9 @@ const Loginpage = () => {
         )}
       </div>
 
-      <div className="flex flex-col items-center justify-center w-[60%] p-3">
+      <div className="flex flex-col items-center justify-center w-full sm:w-[65%] md:w-[65%] p-3 not-last:text-center">
         <h3 className="text-xl font-semibold mb-4">Sign In Use</h3>
-        <div className="flex items-center justify-between w-[30%] mt-1 mb-2 gap-1">
+        <div className="flex items-center justify-center w-full mt-1 mb-2 gap-4 ">
           <a
             className="font-medium  rounded w-7 h-7 overflow-hidden"
             href="https://www.facebook.com/"

@@ -58,7 +58,7 @@ const Otp = (props) => {
     console.log("Button Clicked");
   };
   return (
-    <div className="flex flex-col w-full p-3">
+    <div className="flex flex-col mt-2">
       <div className="flex flex-col justify-between gap-3">
         <input
           className={`p-3 bg-[#f1f3f5] text-black font-normal rounded ${UserFieldValidation === false ? "border-red-500 border-2" : "border-[#f1f3f5]"}`}

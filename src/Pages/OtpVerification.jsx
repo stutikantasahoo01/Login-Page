@@ -31,8 +31,9 @@ const OtpVerification = () => {
     console.log("Otp Button Clicked");
   };
   return (
-    <div className="w-full h-screen flex justify-center items-center ">
-      <div className=" w-[50%] h-[60%] otp-container flex flex-col justify-center gap-2 border-gray-100 shadow-xl border-2 rounded p-4">
+    <div className="w-full sm:w-[60%] min-h-screen p-4 flex justify-center items-center ">
+      {/* <div className=" w-[50%] h-[60%] otp-container flex flex-col justify-center gap-2 border-gray-100 shadow-xl border-2 rounded p-4"> */}
+      <div className=" w-full max-w-[768px] h-auto otp-container flex flex-col justify-center gap-2 border-gray-100 shadow-xl border-2 rounded p-4">
         <h2 className="text-blue-700 text-2xl font-medium ">Enter OTP</h2>
         <h3 className="text-black text-xs font-medium">
           Enter the OTP we sent to your Mobile Number
