@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const OtpVerification = () => {
+  const phoneNumber = "7608883110";
+  const maskedNumber = phoneNumber.replace(/\d{5}$/, "XXXXX");
   const navigate = useNavigate();
   const OtpPattern = /^\d{4}$/;
   const [ValidateOtp, setValidateOtp] = useState("");
@@ -31,14 +33,13 @@ const OtpVerification = () => {
     console.log("Otp Button Clicked");
   };
   return (
-    <div className="w-full sm:w-[60%] min-h-screen p-4 flex justify-center items-center ">
-      {/* <div className=" w-[50%] h-[60%] otp-container flex flex-col justify-center gap-2 border-gray-100 shadow-xl border-2 rounded p-4"> */}
-      <div className=" w-full max-w-[768px] h-auto otp-container flex flex-col justify-center gap-2 border-gray-100 shadow-xl border-2 rounded p-4">
+    <div className="w-full sm:w-[60%] min-h-screen flex justify-center items-center ">
+      <div className=" w-full h-screen sm:h-auto sm:min-h-86 max-w-2xl otp-container flex flex-col justify-center gap-2 sm:border-gray-100 sm:shadow-xl sm:border-2 sm:rounded p-4 ">
         <h2 className="text-blue-700 text-2xl font-medium ">Enter OTP</h2>
         <h3 className="text-black text-xs font-medium">
           Enter the OTP we sent to your Mobile Number
         </h3>
-        <h4 className="text-black text-xs font-normal ">+91 7608883110</h4>
+        <h4 className="text-black text-xs font-normal ">{maskedNumber}</h4>
         <input
           className="p-3 bg-[#f1f3f5] text-black font-normal"
           placeholder="Enter OTP Here"
@@ -53,7 +54,7 @@ const OtpVerification = () => {
             onClick={(elem) => {
               ButtonHandler(elem);
             }}
-            className="bg-[#007bff] text-white py-2 px-3 font-medium mb-5 mt-3 rounded transition-all duration-500 hover:bg-white hover:text-[#007bff] hover:border-blue-600 hover:border"
+            className="bg-[#007bff] text-white py-2 px-3 font-medium mb-5 mt-3 rounded transition-all duration-500 hover:bg-white hover:text-[#007bff] border border-transparent hover:border-blue-600 hover:border"
           >
             Submit
           </button>
