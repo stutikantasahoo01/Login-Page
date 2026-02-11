@@ -3,6 +3,7 @@ import Loginpage from "./Pages/Loginpage";
 import { Routes, Route } from "react-router-dom";
 import OtpVerification from "./Pages/OtpVerification";
 import Dashborad from "./Pages/Dashboard";
+import Registration from "./Pages/Registration";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<Loginpage />} />
         <Route path="/otp-verify" element={<OtpVerification />} />
         <Route path="/Dashboard" element={<Dashborad />} />
+        <Route path="/sign-up" element={<Registration />} />
       </Routes>
     </div>
   );

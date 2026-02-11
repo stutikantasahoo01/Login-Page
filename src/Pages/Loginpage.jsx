@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Password from "../components/Password";
 import Otp from "../components/Otp";
+import { useNavigate, Link } from "react-router-dom";
 
 const Loginpage = () => {
+  const navigate = useNavigate();
   const [Error, setError] = useState([]);
   const ActiveButtonStyle = "text-blue-600 border-blue-600 border-b-4";
   const inactiveButtonStyle = "text-black";
@@ -18,9 +20,9 @@ const Loginpage = () => {
       </h1>
       <h2 className="text-black text-lg mb-3 text-center font-normal">
         Don't have An account with us ?
-        <a className="text-blue-700 text-lg font-normal" href="#">
+        <Link to="/sign-up" className="text-blue-700 text-lg font-normal">
           Click Here To Register
-        </a>
+        </Link>
       </h2>
       <div className="flex items-center justify-center  w-[90%] sm:w-[65%] md:w-[65%] mb-2 mt-3 ">
         <button
@@ -96,15 +98,3 @@ const Loginpage = () => {
 };
 
 export default Loginpage;
-{
-  /* <a
-            className="font-medium bg-amber-50 rounded-full w-7 h-7 overflow-hidden"
-            href="https://github.com/"
-          >
-            <img
-              className="object-cover"
-              src="https://tse3.mm.bing.net/th/id/OIP.eoZPB2gfGH-1ckaL_JSZdwHaHg?pid=Api&P=0&h=180"
-              alt=""
-            />
-          </a> */
-}

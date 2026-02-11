@@ -79,7 +79,7 @@ const Otp = (props) => {
         onClick={(elem) => {
           ButtonHandler(elem);
         }}
-        className="bg-[#007bff] text-white py-2 font-medium mb-5 mt-3 rounded transition-all duration-500 hover:bg-white hover:text-[#007bff] hover:border-blue-600 hover:border"
+        className="bg-[#007bff] text-white py-2 font-medium mb-5 mt-3 rounded transition-all border border-transparent duration-500 hover:bg-white hover:text-[#007bff] hover:border-blue-600 hover:border"
       >
         Login With OTP
       </button>
