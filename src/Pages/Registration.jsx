@@ -114,6 +114,10 @@ const Registration = () => {
     } else {
       alert("Login Failed");
     }
+    setName("");
+    setPassword("");
+    setRepassword("");
+    setCheckboxClicked(false);
   };
 
   return (
@@ -129,6 +133,7 @@ const Registration = () => {
           <input
             className={`px-3 py-2 bg-[#f1f3f5] text-black font-normal w-full rounded ${NameValidation ? "border-transparent " : "border-red-500 border-2"}`}
             type="text"
+            value={Name}
             autoFocus
             onChange={(el) => {
               const value = el.target.value;
@@ -139,6 +144,7 @@ const Registration = () => {
           />
           <div className="flex relative">
             <input
+              value={Password}
               className={`px-3 py-2 bg-[#f1f3f5] text-black font-normal w-full rounded ${PasswordValidation ? "border-transparent " : "border-red-500 border-2"}`}
               type={Showpassword ? "text" : "password"}
               onChange={(el) => {
@@ -158,6 +164,7 @@ const Registration = () => {
           </div>
 
           <input
+            value={Repassword}
             className={`px-3 py-2 bg-[#f1f3f5] text-black font-normal w-full rounded ${SecPasswordValidation ? "border-transparent " : "border-red-500 border-2"}`}
             onChange={(el) => {
               const value = el.target.value;
@@ -169,8 +176,9 @@ const Registration = () => {
           />
           <div className="flex items-center justify-baseline gap-0.5">
             <input
-              onChange={() => {
-                setCheckboxClicked(!CheckboxClicked);
+              checked={CheckboxClicked}
+              onChange={(e) => {
+                setCheckboxClicked(e.target.checked);
               }}
               type="checkbox"
             />
