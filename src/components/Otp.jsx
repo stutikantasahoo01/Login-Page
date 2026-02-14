@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 const Otp = (props) => {
   const navigate = useNavigate();
-  console.log(props);
+ 
   const UserIdPattern = /^[a-zA-Z0-9]+$/;
   const { UserId, setUserId } = props;
   const [UserFieldValidation, setUserFieldValidation] = useState(true);
+
+  const userdata = JSON.stringify({ userId: UserId });
+
   const UserIdValidationCheck = (value) => {
     if (!value) {
       setUserFieldValidation(false);
@@ -29,8 +32,10 @@ const Otp = (props) => {
     setUserFieldValidation(true);
     return true;
   };
+
   const UserIdValidation = () => {
     if (!UserId) {
+      setUserFieldValidation(false);
       alert("Validation Failed,UserId should not be empty");
       return false;
     }
@@ -48,15 +53,17 @@ const Otp = (props) => {
     }
     return true;
   };
+
   const ButtonHandler = (elem) => {
     elem.preventDefault();
     if (UserIdValidation()) {
+      localStorage.setItem("userdata", userdata);
       navigate("/otp-verify");
     } else {
       console.log("Login Failed ,Validation checks not meet");
     }
-    console.log("Button Clicked");
   };
+
   return (
     <div className="flex flex-col mt-2">
       <div className="flex flex-col justify-between gap-3">

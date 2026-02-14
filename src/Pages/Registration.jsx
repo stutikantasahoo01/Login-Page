@@ -1,7 +1,9 @@
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const Registration = () => {
+  const navigate = useNavigate();
   const [CheckboxClicked, setCheckboxClicked] = useState(false);
   const [Name, setName] = useState("");
   const [Password, setPassword] = useState("");
@@ -14,22 +16,6 @@ const Registration = () => {
   const passwordPattern = /^(?=.*[0-9]).{8,}$/;
   const namePattern = /^[a-zA-Z ]+$/;
 
-  const showPassword = () => {
-    setShowpassword(!Showpassword);
-  };
-
-  const OtherPasswordFieldValidation = (val) => {
-    if (!val) {
-      setSecPasswordValidation(false);
-      return false;
-    }
-    if (val !== Password) {
-      setSecPasswordValidation(false);
-      return false;
-    }
-    setSecPasswordValidation(true);
-    return true;
-  };
   const usernameFieldValidation = (val) => {
     if (!val) {
       setNameValidation(false);
@@ -63,46 +49,40 @@ const Registration = () => {
 
     return true;
   };
-  const validatePassword = () => {
-    if (!Password) {
-      setPasswordValidation(false);
-      return false;
-    }
-    if (!passwordPattern.test(Password)) {
-      setPasswordValidation(false);
-      return false;
-    }
-    if (Password.length < 8) {
-      setPasswordValidation(false);
-      return false;
-    }
-    setPasswordValidation(true);
 
+  const OtherPasswordFieldValidation = (val) => {
+    if (!val) {
+      setSecPasswordValidation(false);
+      return false;
+    }
+    if (val !== Password) {
+      setSecPasswordValidation(false);
+      return false;
+    }
+    setSecPasswordValidation(true);
     return true;
   };
 
   const validateName = () => {
-    if (!Name) {
-      return false;
-    }
-    if (!namePattern.test(Name)) {
-      return false;
-    }
-    if (Name.length < 4) {
-      return false;
-    }
-    return true;
+    const isValid = Name && namePattern.test(Name) && Name.length >= 4;
+    setNameValidation(isValid);
+    return isValid;
+  };
+
+  const validatePassword = () => {
+    const isValid =
+      Password && passwordPattern.test(Password) && Password.length >= 8;
+    setPasswordValidation(isValid);
+    return isValid;
   };
 
   const validateOtherPass = () => {
-    if (!Repassword) {
-      return false;
-    }
-    if (Repassword !== Password) {
-      return false;
-    }
-    return true;
+    const isValid = Password !== "" && Repassword === Password;
+    setSecPasswordValidation(isValid);
+    return isValid;
   };
+
+  const userData = JSON.stringify({ name: Name, password: Password });
 
   const ButtonHandler = (elem) => {
     elem.preventDefault();
@@ -110,23 +90,26 @@ const Registration = () => {
     const isNameValid = validateName();
     const isOtherPassValid = validateOtherPass();
     if (isPasswordValid && isNameValid && isOtherPassValid && CheckboxClicked) {
+      localStorage.clear();
+      localStorage.setItem("userdata", userData);
       alert("Login Successfull");
+      setName("");
+      setPassword("");
+      setRepassword("");
+      setCheckboxClicked(false);
+      navigate("/Dashboard");
     } else {
       alert("Login Failed");
     }
-    setName("");
-    setPassword("");
-    setRepassword("");
-    setCheckboxClicked(false);
   };
 
   return (
-    <div className="w-full min-h-screen sm:max-w-2xl flex justify-center items-center  ">
+    <div className="w-full min-h-screen sm:max-w-2xl flex justify-center items-center  mx-auto">
       <div className="w-full h-full flex flex-col justify-center items-center p-4">
-        <h1 className="text-2xl mt-7 mb-4 font-sembold text-center">
+        <h1 className="text-2xl mt-7 mb-4 font-semibold text-center">
           Create Account
         </h1>
-        <h2 className="text-base mb-10 font-sembold text-center">
+        <h2 className="text-xl mb-10 text-center">
           Enter Your Valid Credentials Here
         </h2>
         <div className="flex flex-col w-full sm:w-[60%] gap-4">
@@ -154,7 +137,10 @@ const Registration = () => {
               }}
               placeholder="Enter password"
             />
-            <button onClick={showPassword} className="absolute right-3 top-2">
+            <button
+              onClick={() => setShowpassword(!Showpassword)}
+              className="absolute right-3 top-2"
+            >
               {Showpassword ? (
                 <Eye strokeWidth={1.35} />
               ) : (
@@ -172,7 +158,7 @@ const Registration = () => {
               OtherPasswordFieldValidation(value);
             }}
             type="password"
-            placeholder="Enter password again"
+            placeholder="Confirm password"
           />
           <div className="flex items-center justify-baseline gap-0.5">
             <input
@@ -194,6 +180,12 @@ const Registration = () => {
           >
             Submit
           </button>
+          <h2 className="text-black text-xl mb-3 text-center font-normal">
+            Already have An account with us ?
+            <Link to="/" className="text-blue-700 text-xl font-normal">
+              Click Here To Login
+            </Link>
+          </h2>
         </div>
       </div>
     </div>

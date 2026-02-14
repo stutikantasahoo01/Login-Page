@@ -4,17 +4,16 @@ import { useState } from "react";
 const Password = (props) => {
   const validation_message = {
     empty_id: "User ID is required",
-    empty_password: "Password is required",
     invalid_userid: "Please enter a valid User ID",
+    empty_password: "Password is required",
     invalid_pass: "Please enter valid password",
-    success_login: "Login Succesfull",
-    failed_login: "Login Failed",
   };
   const removeError = (message) => {
     props.setError((prevError) =>
       prevError.filter((error) => error !== message),
     );
   };
+
   const [PasswordFieldValidation, setPasswordFieldValidation] = useState(true);
   const [InputValidation, setInputValidation] = useState(true);
   const [ShowPassword, setShowPassword] = useState(false);
@@ -25,9 +24,7 @@ const Password = (props) => {
   const setUserId = props.setUserId;
   const UserPassword = props.UserPassword;
   const setUserPassword = props.setUserPassword;
-  const showPassword = () => {
-    setShowPassword(!ShowPassword);
-  };
+
   const inputFildValidation = (value) => {
     if (!value) {
       setInputValidation(false);
@@ -49,6 +46,7 @@ const Password = (props) => {
     setInputValidation(true);
     return true;
   };
+
   const passwordFildValidation = (value) => {
     if (!value) {
       setPasswordFieldValidation(false);
@@ -65,42 +63,54 @@ const Password = (props) => {
     setPasswordFieldValidation(true);
     return true;
   };
+
   const UserIdValidation = () => {
     if (!UserId) {
-      alert("User Id should not be empty");
+      setInputValidation(false);
+      removeError(validation_message.empty_id);
       return false;
     }
     if (!UserIdPattern.test(UserId)) {
+      removeError(validation_message.invalid_userid);
       return false;
     }
     if (UserId.includes(" ")) {
-      alert("User Id should not contain any white space");
+      removeError(validation_message.invalid_userid);
       return false;
     }
 
     if (UserId.length < 8) {
-      alert("User Id should be greater than 8");
+      removeError(validation_message.invalid_userid);
       return false;
     }
     return true;
   };
+
   const UserPasswordValidation = () => {
     if (!UserPassword) {
-      alert("Password should not be empty");
+      setPasswordFieldValidation(false);
+      removeError(validation_message.empty_password);
       return false;
     }
     if (UserPassword.length < 8) {
-      alert("Password should be greater than 8");
+      removeError(validation_message.invalid_pass);
       return false;
     }
     if (!passwordPattern.test(UserPassword)) {
+      removeError(validation_message.invalid_pass);
       return false;
     }
     return true;
   };
+
+  const userData = JSON.stringify({ UserID: UserId, Password: UserPassword });
+
   const ButtonHandler = (elem) => {
     elem.preventDefault();
-    if (UserIdValidation() && UserPasswordValidation()) {
+    const isUserIdValid = UserIdValidation();
+    const isPasswordValid = UserPasswordValidation();
+    if (isUserIdValid && isPasswordValid) {
+      localStorage.setItem("userdata", userData);
       alert("Login Successful");
       navigate("/Dashboard");
     } else {
@@ -109,6 +119,7 @@ const Password = (props) => {
 
     console.log("Button Is Clicked");
   };
+
   return (
     <div className="flex flex-col mt-2">
       <div className="flex flex-col justify-between gap-5">
@@ -140,9 +151,7 @@ const Password = (props) => {
             id="Password"
           />
           <button
-            onClick={() => {
-              showPassword();
-            }}
+            onClick={() => setShowPassword(!ShowPassword)}
             className="absolute right-3 top-3 "
           >
             {ShowPassword ? (
