@@ -42,7 +42,7 @@ const Loginpage = () => {
       <div className="error-box flex flex-col w-[90%] sm:w-[65%] md:w-[65%] text-center gap-1">
         {Error.map((el, idx) => {
           return (
-            <h1 key={idx} className="bg-[#f1f3f5] text-red-500">
+            <h1 key={idx} className="bg-red-500 text-white rounded p-1.5">
               {el}
             </h1>
           );

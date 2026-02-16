@@ -29,7 +29,7 @@ const Otp = (props) => {
     });
     setTimeout(() => {
       removeError([message]);
-    }, 2000);
+    }, 4000);
   };
 
   const UserIdValidationCheck = (value) => {

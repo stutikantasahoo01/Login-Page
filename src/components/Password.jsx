@@ -24,7 +24,7 @@ const Password = (props) => {
     });
     setTimeout(() => {
       removeError([message]);
-    }, 2000);
+    }, 4000);
   };
 
   const [PasswordFieldValidation, setPasswordFieldValidation] = useState(true);

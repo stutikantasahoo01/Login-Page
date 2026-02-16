@@ -38,7 +38,7 @@ const Registration = () => {
     });
     setTimeout(() => {
       removeError([message]);
-    }, 2000);
+    }, 4000);
   };
 
   const passwordPattern = /^(?=.*[0-9]).{8,}$/;
@@ -159,10 +159,10 @@ const Registration = () => {
         <h2 className="text-xl mb-10 text-center">
           Enter Your Valid Credentials Here
         </h2>
-        <div className="error-box flex flex-col w-[90%] sm:w-[65%] md:w-[65%] text-center gap-1">
+        <div className="error-box flex flex-col w-full sm:w-[60%] text-center gap-1 mb-2 mt-2">
           {Error.map((el, idx) => {
             return (
-              <h1 key={idx} className="bg-[#f1f3f5] text-red-500">
+              <h1 key={idx} className="bg-red-500 text-white rounded p-1.5">
                 {el}
               </h1>
             );
@@ -236,9 +236,9 @@ const Registration = () => {
           >
             Submit
           </button>
-          <h2 className="text-black text-xl mb-3 text-center font-normal">
+          <h2 className="text-black text-l mb-3 text-center font-normal">
             Already have An account with us ?
-            <Link to="/" className="text-blue-700 text-xl font-normal">
+            <Link to="/" className="text-blue-700 text-l font-normal">
               Click Here To Login
             </Link>
           </h2>
