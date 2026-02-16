@@ -12,6 +12,34 @@ const Registration = () => {
   const [NameValidation, setNameValidation] = useState(true);
   const [PasswordValidation, setPasswordValidation] = useState(true);
   const [SecPasswordValidation, setSecPasswordValidation] = useState(true);
+  const [Error, setError] = useState([]);
+
+  const validation_message = {
+    empty_name: "Empty user name",
+    invalid_name: "Invalid user name",
+    empty_pass: "Empty Password",
+    invalid_pass: "Invalid Password",
+    empty_conpass: "Empty confirm password",
+    missmatch_pass: "Password do not match",
+  };
+  const removeError = (message) => {
+    setError((prevError) => {
+      const updatedError = prevError.filter(
+        (error) => !message.includes(error),
+      );
+      return updatedError;
+    });
+  };
+
+  const addError = (message) => {
+    setError((prevError) => {
+      if (prevError.includes(message)) return prevError;
+      return [...prevError, message];
+    });
+    setTimeout(() => {
+      removeError([message]);
+    }, 2000);
+  };
 
   const passwordPattern = /^(?=.*[0-9]).{8,}$/;
   const namePattern = /^[a-zA-Z ]+$/;
@@ -64,21 +92,40 @@ const Registration = () => {
   };
 
   const validateName = () => {
+    const idError = [
+      validation_message.empty_name,
+      validation_message.invalid_name,
+    ];
     const isValid = Name && namePattern.test(Name) && Name.length >= 4;
     setNameValidation(isValid);
+    isValid ? removeError(idError) : addError(!Name ? idError[0] : idError[1]);
     return isValid;
   };
 
   const validatePassword = () => {
+    const idError = [
+      validation_message.empty_pass,
+      validation_message.invalid_pass,
+    ];
     const isValid =
       Password && passwordPattern.test(Password) && Password.length >= 8;
     setPasswordValidation(isValid);
+    isValid
+      ? removeError(idError)
+      : addError(!Password ? idError[0] : idError[1]);
     return isValid;
   };
 
   const validateOtherPass = () => {
+    const idError = [
+      validation_message.empty_conpass,
+      validation_message.missmatch_pass,
+    ];
     const isValid = Password !== "" && Repassword === Password;
     setSecPasswordValidation(isValid);
+    isValid
+      ? removeError(idError)
+      : addError(Repassword === "" ? idError[0] : idError[1]);
     return isValid;
   };
 
@@ -112,6 +159,15 @@ const Registration = () => {
         <h2 className="text-xl mb-10 text-center">
           Enter Your Valid Credentials Here
         </h2>
+        <div className="error-box flex flex-col w-[90%] sm:w-[65%] md:w-[65%] text-center gap-1">
+          {Error.map((el, idx) => {
+            return (
+              <h1 key={idx} className="bg-[#f1f3f5] text-red-500">
+                {el}
+              </h1>
+            );
+          })}
+        </div>
         <div className="flex flex-col w-full sm:w-[60%] gap-4">
           <input
             className={`px-3 py-2 bg-[#f1f3f5] text-black font-normal w-full rounded ${NameValidation ? "border-transparent " : "border-red-500 border-2"}`}

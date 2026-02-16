@@ -3,12 +3,34 @@ import { useNavigate } from "react-router-dom";
 
 const Otp = (props) => {
   const navigate = useNavigate();
- 
   const UserIdPattern = /^[a-zA-Z0-9]+$/;
   const { UserId, setUserId } = props;
   const [UserFieldValidation, setUserFieldValidation] = useState(true);
 
   const userdata = JSON.stringify({ userId: UserId });
+
+  const validationMessage = {
+    empty_id: "Empty User ID",
+    invalid_id: "Invalid User ID",
+  };
+
+  const removeError = (message) => {
+    props.setError((prevError) => {
+      const updatedError = prevError.filter(
+        (error) => !message.includes(error),
+      );
+      return updatedError;
+    });
+  };
+  const addError = (message) => {
+    props.setError((prevError) => {
+      if (prevError.includes(message)) return prevError;
+      return [...prevError, message];
+    });
+    setTimeout(() => {
+      removeError([message]);
+    }, 2000);
+  };
 
   const UserIdValidationCheck = (value) => {
     if (!value) {
@@ -34,23 +56,26 @@ const Otp = (props) => {
   };
 
   const UserIdValidation = () => {
+    const idError = [validationMessage.empty_id, validationMessage.invalid_id];
     if (!UserId) {
       setUserFieldValidation(false);
-      alert("Validation Failed,UserId should not be empty");
+      addError(validationMessage.empty_id);
       return false;
     }
     if (!UserIdPattern.test(UserId)) {
+      addError(validationMessage.invalid_id);
       return false;
     }
     if (UserId.includes(" ")) {
-      alert("User Id should not contain any white space");
+      addError(validationMessage.invalid_id);
       return false;
     }
 
     if (UserId.length < 8) {
-      alert("User Id should be greater than 8");
+      addError(validationMessage.invalid_id);
       return false;
     }
+    removeError(idError);
     return true;
   };
 

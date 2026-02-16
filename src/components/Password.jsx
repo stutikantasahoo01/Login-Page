@@ -4,14 +4,27 @@ import { useState } from "react";
 const Password = (props) => {
   const validation_message = {
     empty_id: "User ID is required",
-    invalid_userid: "Please enter a valid User ID",
+    invalid_userid: "Invalid User ID",
     empty_password: "Password is required",
-    invalid_pass: "Please enter valid password",
+    invalid_pass: "Invalid password",
   };
   const removeError = (message) => {
-    props.setError((prevError) =>
-      prevError.filter((error) => error !== message),
-    );
+    props.setError((prevError) => {
+      const updatedErrors = prevError.filter(
+        (error) => !message.includes(error),
+      );
+      return updatedErrors;
+    });
+  };
+
+  const addError = (message) => {
+    props.setError((prevError) => {
+      if (prevError.includes(message)) return prevError;
+      return [...prevError, message];
+    });
+    setTimeout(() => {
+      removeError([message]);
+    }, 2000);
   };
 
   const [PasswordFieldValidation, setPasswordFieldValidation] = useState(true);
@@ -47,6 +60,32 @@ const Password = (props) => {
     return true;
   };
 
+  const UserIdValidation = () => {
+    const idErrors = [
+      validation_message.empty_id,
+      validation_message.invalid_userid,
+    ];
+    if (!UserId) {
+      setInputValidation(false);
+      addError(validation_message.empty_id);
+      return false;
+    }
+    if (!UserIdPattern.test(UserId)) {
+      addError(validation_message.invalid_userid);
+      return false;
+    }
+    if (UserId.includes(" ")) {
+      addError(validation_message.invalid_userid);
+      return false;
+    }
+    if (UserId.length < 8) {
+      addError(validation_message.invalid_userid);
+      return false;
+    }
+    removeError(idErrors);
+    return true;
+  };
+
   const passwordFildValidation = (value) => {
     if (!value) {
       setPasswordFieldValidation(false);
@@ -64,42 +103,27 @@ const Password = (props) => {
     return true;
   };
 
-  const UserIdValidation = () => {
-    if (!UserId) {
-      setInputValidation(false);
-      removeError(validation_message.empty_id);
-      return false;
-    }
-    if (!UserIdPattern.test(UserId)) {
-      removeError(validation_message.invalid_userid);
-      return false;
-    }
-    if (UserId.includes(" ")) {
-      removeError(validation_message.invalid_userid);
-      return false;
-    }
-
-    if (UserId.length < 8) {
-      removeError(validation_message.invalid_userid);
-      return false;
-    }
-    return true;
-  };
-
   const UserPasswordValidation = () => {
+    const idErrors = [
+      validation_message.empty_password,
+      validation_message.invalid_pass,
+    ];
     if (!UserPassword) {
+      addError(validation_message.empty_password);
       setPasswordFieldValidation(false);
-      removeError(validation_message.empty_password);
       return false;
     }
     if (UserPassword.length < 8) {
-      removeError(validation_message.invalid_pass);
+      addError(validation_message.invalid_pass);
+      setPasswordFieldValidation(false);
       return false;
     }
     if (!passwordPattern.test(UserPassword)) {
-      removeError(validation_message.invalid_pass);
+      addError(validation_message.invalid_pass);
+      setPasswordFieldValidation(false);
       return false;
     }
+    removeError(idErrors);
     return true;
   };
 

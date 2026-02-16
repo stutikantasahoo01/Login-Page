@@ -13,6 +13,7 @@ const Loginpage = () => {
   const [ActiveTab, setActiveTab] = useState("Password");
   const ShowPassword = () => setActiveTab("Password");
   const ShowOtp = () => setActiveTab("Otp");
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] w-full sm:w-full md:max-w-xl lg:max-w-2xl p-6 sm:p-10 ">
       <h1 className="text-2xl mt-3 mb-2 font-sembold text-center">
@@ -37,6 +38,15 @@ const Loginpage = () => {
         >
           Login with OTP
         </button>
+      </div>
+      <div className="error-box flex flex-col w-[90%] sm:w-[65%] md:w-[65%] text-center gap-1">
+        {Error.map((el, idx) => {
+          return (
+            <h1 key={idx} className="bg-[#f1f3f5] text-red-500">
+              {el}
+            </h1>
+          );
+        })}
       </div>
       <div className="w-[90%] sm:w-[65%] md:w-[65%]">
         {ActiveTab === "Password" ? (
