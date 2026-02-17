@@ -152,7 +152,7 @@ const Registration = () => {
 
   return (
     <div className="w-full min-h-screen sm:max-w-2xl flex justify-center items-center  mx-auto">
-      <div className="w-full h-full flex flex-col justify-center items-center p-4">
+      <div className="w-full h-full flex flex-col justify-center items-center p-7">
         <h1 className="text-2xl mt-7 mb-4 font-semibold text-center">
           Create Account
         </h1>
